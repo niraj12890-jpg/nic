@@ -313,32 +313,44 @@
     }
 
     // ADMISSION SUBMISSION LOGIC
-    document.getElementById('admissionForm').onsubmit = async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('subBtn');
-        btn.disabled = true; 
-        btn.innerHTML = "<i class='fas fa-sync fa-spin mr-2'></i> Submitting...";
-        
-        const formData = {
-            name: e.target.name.value,
-            fname: e.target.fname.value,
-            mobile: e.target.mobile.value,
-            class: e.target.class.value
-        };
+    // ADMISSION SUBMISSION LOGIC (Updated for Auto-ID Display)
+document.getElementById('admissionForm').onsubmit = async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('subBtn');
+    btn.disabled = true; 
+    btn.innerHTML = "<i class='fas fa-sync fa-spin mr-2'></i> Processing...";
+    
+    const formData = {
+        name: e.target.name.value,
+        fname: e.target.fname.value,
+        mobile: e.target.mobile.value,
+        class: e.target.class.value
+    };
 
-        try {
-            await fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify({ action: "submitAdmission", formData: formData })
-            });
+    try {
+        const resp = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: "submitAdmission", formData: formData })
+        });
+        const result = await resp.json();
+
+        if(result.success) {
+            // Modal mein Student ki Nayi ID dikhana
+            const modalBody = document.querySelector('#successModal p');
+            modalBody.innerHTML = `आपका आवेदन सफल रहा!<br><br><span class="text-2xl font-black text-blue-900 bg-yellow-100 px-4 py-2 rounded-lg border-2 border-dashed border-blue-900 mt-4 block">${result.id}</span><br>कृपया इस ID को नोट कर लें।`;
+            
             document.getElementById('successModal').classList.remove('hidden');
             e.target.reset();
-        } catch(err) {
-            alert("Error submitting form. Please check your internet.");
-        } finally {
-            btn.disabled = false; 
-            btn.innerHTML = "आवेदन जमा करें (Submit)";
+        } else {
+            alert("Kuch galti hui: " + result.message);
         }
+    } catch(err) {
+        alert("Server connection fail! Kripya internet check karein.");
+    } finally {
+        btn.disabled = false; 
+        btn.innerHTML = "आवेदन जमा करें (Submit)";
+    }
+};
     };
   </script>
 </body>
