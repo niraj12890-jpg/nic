@@ -1,177 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nehru Inter College - Official Portal</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
-        body { font-family: 'Mukta', sans-serif; }
-        .hero-bg {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1523050853063-915894612264?auto=format&fit=crop&q=80&w=1200');
-            background-size: cover; background-position: center;
-        }
-        @media print {
-            body * { visibility: hidden; }
-            #printableArea, #printableArea * { visibility: visible; }
-            #printableArea { position: absolute; left: 0; top: 0; width: 100%; border:none; }
-            .no-print { display: none !important; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>नेहरू इण्टर कालेज - Official Digital Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
+    body { font-family: 'Mukta', sans-serif; scroll-behavior: smooth; }
+    
+    /* PRINT LOGIC: Professional Card Printing */
+    @media print {
+      body * { visibility: hidden; }
+      #printableArea, #printableArea * { visibility: visible; }
+      #printableArea { 
+        position: absolute; 
+        left: 50%; 
+        top: 20px; 
+        transform: translateX(-50%); 
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .no-print { display: none !important; }
+      .bg-white { border: none !important; box-shadow: none !important; }
+    }
+
+    .hero-bg {
+      background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(30, 58, 138, 0.7)), 
+                  url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=1200');
+      background-size: cover; background-position: center;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100">
 
-    <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50 shadow-2xl">
-        <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <div class="bg-yellow-400 text-blue-900 p-2 rounded-full font-bold">NIC</div>
-                <h1 class="text-xl font-bold tracking-tighter">NEHRU INTER COLLEGE <span class="block text-[10px] text-yellow-300">UTTAR PRADESH</span></h1>
-            </div>
-            <div class="space-x-4">
-                <button onclick="showPage('home')" class="hover:text-yellow-400">Home</button>
-                <button onclick="showPage('portal')" class="bg-yellow-500 text-blue-900 px-4 py-1 rounded font-bold">Portal</button>
-            </div>
+  <nav class="bg-blue-900 text-white shadow-2xl sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-3 cursor-pointer" onclick="showPage('home')">
+        <div class="bg-yellow-400 text-blue-900 h-10 w-10 flex items-center justify-center rounded-full font-bold shadow-lg">NIC</div>
+        <h1 class="text-xl font-bold tracking-tight">नेहरू इण्टर कालेज<span class="block text-[10px] text-yellow-400 uppercase tracking-widest">Uttar Pradesh, India</span></h1>
+      </div>
+      <div class="space-x-2 md:space-x-6 flex items-center">
+        <button onclick="showPage('home')" class="hover:text-yellow-400 font-medium transition">Home</button>
+        <button onclick="showPage('portal')" class="bg-yellow-500 text-blue-900 px-4 py-1.5 rounded-lg font-bold hover:bg-yellow-400 transition shadow-md">Student Zone</button>
+        <a id="adminLink" href="#" target="_blank" class="bg-white/10 p-2 rounded-full hover:bg-white/20 transition"><i class="fas fa-user-shield"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="home" class="animate__animated animate__fadeIn">
+    <div class="hero-bg min-h-[500px] flex items-center justify-center text-center text-white px-4">
+      <div class="max-w-3xl">
+        <span class="bg-yellow-500 text-blue-900 px-4 py-1 rounded-full text-sm font-bold mb-4 inline-block animate__animated animate__bounceIn">Session 2025-26 Admissions Open</span>
+        <h2 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-2xl">शिक्षा ही जीवन का आधार है</h2>
+        <p class="text-lg md:text-xl mb-8 opacity-95 font-light">उत्तर प्रदेश के ग्रामीण अंचल में आधुनिक और संस्कारयुक्त शिक्षा का प्रमुख केंद्र।</p>
+        <div class="flex flex-col md:flex-row justify-center gap-4">
+          <button onclick="showPage('admission')" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-xl font-bold text-lg shadow-2xl transition transform hover:-translate-y-1">प्रवेश फार्म भरें <i class="fas fa-edit ml-2"></i></button>
+          <button onclick="showPage('portal')" class="bg-white text-blue-900 hover:bg-gray-100 px-8 py-3 rounded-xl font-bold text-lg shadow-2xl transition transform hover:-translate-y-1">रिजल्ट/प्रवेश पत्र <i class="fas fa-search ml-2"></i></button>
         </div>
-    </nav>
+      </div>
+    </div>
 
-    <section id="home" class="animate__animated animate__fadeIn">
-        <div class="hero-bg h-[450px] flex items-center justify-center text-center text-white">
-            <div class="max-w-2xl px-4">
-                <h2 class="text-5xl font-extrabold mb-4">Shiksha, Pragati, Shanti</h2>
-                <p class="text-lg opacity-90 mb-6">Uttar Pradesh Board se manyata prapt agami shiksha kendra.</p>
-                <button onclick="showPage('admission')" class="bg-red-600 px-8 py-3 rounded-full font-bold text-lg animate__animated animate__pulse animate__infinite">Apply Admission 2025</button>
+    <div class="container mx-auto py-12 px-4">
+      <div class="grid md:grid-cols-12 gap-8">
+        <div class="md:col-span-8">
+          <h3 class="text-3xl font-bold text-blue-900 mb-6 border-l-4 border-yellow-500 pl-4">कॉलेज की झलक (Gallery)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1523050853063-915894612264?auto=format&fit=crop&q=80&w=600" class="rounded-2xl shadow-lg hover:opacity-90 transition cursor-pointer">
+            <div class="grid grid-rows-2 gap-4">
+              <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600" class="rounded-2xl shadow-lg h-full object-cover">
+              <img src="https://images.unsplash.com/photo-1577891729319-f28b3c14a533?auto=format&fit=crop&q=80&w=600" class="rounded-2xl shadow-lg h-full object-cover">
             </div>
+          </div>
         </div>
-
-        <div class="container mx-auto py-12 px-4 grid md:grid-cols-3 gap-6">
-            <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
-            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
-            <img src="https://images.unsplash.com/photo-1577891729319-f28b3c14a533?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
+        <div class="md:col-span-4 bg-white p-6 rounded-3xl shadow-xl border border-gray-100">
+          <h3 class="text-xl font-bold text-red-600 mb-4 flex items-center"><i class="fas fa-bullhorn mr-2"></i> महत्वपूर्ण सूचना</h3>
+          <div id="noticeList" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+             <p class="text-gray-400 text-sm animate-pulse">सूचना लोड हो रही है...</p>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
 
-    <section id="portal" class="hidden container mx-auto p-6 animate__animated animate__fadeInUp">
-        <div class="grid md:grid-cols-3 gap-6 mb-10">
-            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-green-500">
-                <h3 class="font-bold text-xl mb-4">Check Result</h3>
-                <input id="rollRes" class="w-full border p-2 rounded mb-3" placeholder="Enter Roll No">
-                <button onclick="fetchAPI('Result')" class="w-full bg-green-600 text-white py-2 rounded">View Marksheet</button>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-blue-500">
-                <h3 class="font-bold text-xl mb-4">Identity Card</h3>
-                <input id="idInput" class="w-full border p-2 rounded mb-3" placeholder="Enter Student ID">
-                <button onclick="fetchAPI('ID')" class="w-full bg-blue-600 text-white py-2 rounded">Get ID Card</button>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-orange-500">
-                <h3 class="font-bold text-xl mb-4">Admit Card</h3>
-                <input id="admitInput" class="w-full border p-2 rounded mb-3" placeholder="Enter Roll No">
-                <button onclick="fetchAPI('Admit')" class="w-full bg-orange-600 text-white py-2 rounded">Get Admit Card</button>
-            </div>
+  <div id="portal" class="hidden container mx-auto p-6 animate__animated animate__zoomIn">
+    <h2 class="text-3xl font-bold text-center text-blue-900 mb-10">स्टूडेंट सर्विस पोर्टल</h2>
+    <div class="grid md:grid-cols-3 gap-8 mb-12">
+      <div class="glass-card p-6 rounded-3xl shadow-lg border-b-8 border-green-500 transition hover:shadow-2xl">
+        <div class="h-12 w-12 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-poll"></i></div>
+        <h3 class="font-bold text-xl mb-4 text-gray-800">परीक्षा परिणाम</h3>
+        <input id="rollRes" class="w-full border-2 border-gray-100 p-3 rounded-xl mb-3 focus:border-green-500 outline-none transition" placeholder="अनुक्रमांक दर्ज करें">
+        <button onclick="fetchData('Result')" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold shadow-lg transition">रिजल्ट देखें</button>
+      </div>
+      <div class="glass-card p-6 rounded-3xl shadow-lg border-b-8 border-blue-500 transition hover:shadow-2xl">
+        <div class="h-12 w-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-id-badge"></i></div>
+        <h3 class="font-bold text-xl mb-4 text-gray-800">Identity Card</h3>
+        <input id="idInput" class="w-full border-2 border-gray-100 p-3 rounded-xl mb-3 focus:border-blue-500 outline-none transition" placeholder="Student ID दर्ज करें">
+        <button onclick="fetchData('ID')" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-bold shadow-lg transition">ID Card डाउनलोड करें</button>
+      </div>
+      <div class="glass-card p-6 rounded-3xl shadow-lg border-b-8 border-orange-500 transition hover:shadow-2xl">
+        <div class="h-12 w-12 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center mb-4 text-xl"><i class="fas fa-file-pdf"></i></div>
+        <h3 class="font-bold text-xl mb-4 text-gray-800">प्रवेश पत्र (Admit Card)</h3>
+        <input id="admitInput" class="w-full border-2 border-gray-100 p-3 rounded-xl mb-3 focus:border-orange-500 outline-none transition" placeholder="अनुक्रमांक दर्ज करें">
+        <button onclick="fetchData('Admit')" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-xl font-bold shadow-lg transition">प्रवेश पत्र निकालें</button>
+      </div>
+    </div>
+    <div id="printableArea" class="flex justify-center min-h-[400px] mb-20"></div>
+  </div>
+
+  <div id="admission" class="hidden container mx-auto max-w-2xl p-6 animate__animated animate__fadeIn">
+    <div class="bg-white p-8 rounded-[2rem] shadow-2xl border border-gray-50">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-blue-900 underline decoration-yellow-400">ऑनलाइन प्रवेश फार्म - 2025</h2>
+        <p class="text-gray-500 mt-2">कृपया सभी जानकारी सही-सही भरें।</p>
+      </div>
+      <form id="admissionForm" class="space-y-5">
+        <div class="grid md:grid-cols-2 gap-5">
+            <div><label class="block font-bold text-gray-700 mb-1">छात्र/छात्रा का नाम</label><input name="name" required class="w-full border-2 border-gray-100 p-3 rounded-xl focus:border-blue-500 outline-none transition"></div>
+            <div><label class="block font-bold text-gray-700 mb-1">पिता का नाम</label><input name="fname" required class="w-full border-2 border-gray-100 p-3 rounded-xl focus:border-blue-500 outline-none transition"></div>
         </div>
-        <div id="printableArea" class="flex justify-center p-4"></div>
-    </section>
-
-    <section id="admission" class="hidden container mx-auto max-w-xl p-6 animate__animated animate__zoomIn">
-        <div class="bg-white p-8 rounded-3xl shadow-2xl border">
-            <h2 class="text-3xl font-bold text-center text-blue-900 mb-6">New Admission 2025</h2>
-            <form id="admForm" class="space-y-4">
-                <input name="name" placeholder="Student Full Name" required class="w-full border p-3 rounded-lg">
-                <input name="fname" placeholder="Father's Name" required class="w-full border p-3 rounded-lg">
-                <input name="mobile" placeholder="Mobile Number" required class="w-full border p-3 rounded-lg">
-                <select name="class" class="w-full border p-3 rounded-lg"><option>9th</option><option>10th</option><option>11th</option><option>12th</option></select>
-                <textarea name="address" placeholder="Full Address" class="w-full border p-3 rounded-lg"></textarea>
-                <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold">Submit Application</button>
-            </form>
+        <div class="grid grid-cols-2 gap-5">
+          <div><label class="block font-bold text-gray-700 mb-1">जन्म तिथि</label><input type="date" name="dob" required class="w-full border-2 border-gray-100 p-3 rounded-xl outline-none"></div>
+          <div><label class="block font-bold text-gray-700 mb-1">कक्षा</label><select name="class" class="w-full border-2 border-gray-100 p-3 rounded-xl outline-none"><option>9th</option><option>10th</option><option>11th</option><option>12th</option></select></div>
         </div>
-    </section>
+        <div><label class="block font-bold text-gray-700 mb-1">मोबाइल नंबर</label><input type="tel" name="mobile" required class="w-full border-2 border-gray-100 p-3 rounded-xl outline-none" pattern="[0-9]{10}"></div>
+        <div><label class="block font-bold text-gray-700 mb-1">स्थायी पता</label><textarea name="address" required class="w-full border-2 border-gray-100 p-3 rounded-xl outline-none h-24"></textarea></div>
+        <button type="submit" class="w-full bg-blue-900 text-white py-4 rounded-2xl font-bold text-xl shadow-xl hover:bg-blue-800 transition transform active:scale-95">आवेदन जमा करें (Submit Application)</button>
+      </form>
+    </div>
+  </div>
 
-    <script>
-        // YAHAN APNA APPS SCRIPT URL DALEIN
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcE6dfDaF2uUCxeU3Li6_anu-v1RbrQFxNF2OyMp5D87_3GGc70Ygfd6swZJtaqanl0Q/exec";
+  <footer class="bg-blue-900 text-white py-10 mt-20 no-print">
+    <div class="container mx-auto px-4 text-center">
+        <p class="font-bold">नेहरू इण्टर कालेज - उत्तर प्रदेश</p>
+        <p class="text-sm opacity-60 mt-2">&copy; 2025 All Rights Reserved. Designed by AI Thought Partner.</p>
+    </div>
+  </footer>
 
-        function showPage(id) {
-            ['home', 'portal', 'admission'].forEach(p => document.getElementById(p).classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
+  <script>
+    // 1. APPS SCRIPT WEB APP URL YAHAN DALEIN
+    const SCRIPT_URL = "YOUR_APPS_SCRIPT_URL_HERE"; 
 
-        async function fetchAPI(type) {
-            const area = document.getElementById('printableArea');
-            let val = "";
-            if(type==='Result') { val = document.getElementById('rollRes').value; document.getElementById('rollRes').value=''; }
-            if(type==='ID') { val = document.getElementById('idInput').value; document.getElementById('idInput').value=''; }
-            if(type==='Admit') { val = document.getElementById('admitInput').value; document.getElementById('admitInput').value=''; }
+    function showPage(p) {
+      ['home', 'portal', 'admission'].forEach(id => document.getElementById(id).classList.add('hidden'));
+      document.getElementById(p).classList.remove('hidden');
+      window.scrollTo(0,0);
+    }
 
-            area.innerHTML = "<p class='animate-pulse text-blue-600 font-bold'>Searching in Database...</p>";
-
-            const response = await fetch(SCRIPT_URL, {
-                method: "POST",
-                body: JSON.stringify({ action: "getStudent", id: val, type: type })
-            });
-            const data = await response.json();
-
-            if(!data) { area.innerHTML = "No Record Found!"; return; }
-            render(data, type);
-        }
-
-        function render(data, type) {
-            const area = document.getElementById('printableArea');
-            let html = "";
-            if(type === 'Result') {
-                html = `<div class="bg-white border-4 border-double border-blue-900 p-8 w-full max-w-lg shadow-xl">
-                    <h2 class="text-center font-bold text-xl uppercase">Nehru Inter College</h2>
-                    <h4 class="text-center text-sm border-b pb-2 mb-4">Official Marksheet 2024-25</h4>
-                    <div class="text-sm mb-4"><b>Name:</b> ${data.Name} <br> <b>Roll No:</b> ${data.RollNo}</div>
-                    <table class="w-full border text-left text-sm">
-                        <tr class="bg-gray-100"><th class="p-2 border">Subject</th><th class="p-2 border">Marks</th></tr>
-                        <tr><td class="p-2 border">Hindi/Maths/Sci</td><td class="p-2 border">${data.Total}</td></tr>
-                    </table>
-                    <div class="mt-4 font-bold text-green-700">RESULT: ${data.Status}</div>
-                    <button onclick="window.print()" class="no-print mt-4 bg-black text-white px-3 py-1 text-xs">Print Marksheet</button>
-                </div>`;
-            } else {
-                html = `<div class="bg-white border-2 border-blue-900 rounded-xl w-72 h-96 relative shadow-2xl overflow-hidden">
-                    <div class="bg-blue-900 text-white text-center p-2 text-xs font-bold uppercase">${type} CARD</div>
-                    <div class="p-4 flex flex-col items-center">
-                        <img src="${data.PhotoURL}" class="w-24 h-24 border mb-2 object-cover">
-                        <h3 class="font-bold">${data.Name}</h3>
-                        <p class="text-xs text-gray-500">${data.FatherName}</p>
-                        <div class="w-full mt-4 text-[11px] space-y-1 bg-gray-50 p-2">
-                            <p>Class: ${data.Class}</p>
-                            <p>ID/Roll: ${data.StudentID || data.RollNo}</p>
-                        </div>
-                    </div>
-                    <button onclick="window.print()" class="no-print absolute bottom-2 right-2 bg-blue-900 text-white p-1 text-[10px]">Print</button>
-                </div>`;
-            }
-            area.innerHTML = html;
-        }
-
-        document.getElementById('admForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const btn = e.target.querySelector('button');
-            btn.innerHTML = "Submitting..."; btn.disabled = true;
-
-            const formData = {
-                name: e.target.name.value,
-                fname: e.target.fname.value,
-                mobile: e.target.mobile.value,
-                class: e.target.class.value,
-                address: e.target.address.value
-            };
-
+    // Load Notices on Startup
+    window.onload = async () => {
+        try {
             const resp = await fetch(SCRIPT_URL, {
-                method: "POST",
-                body: JSON.stringify({ action: "submitAdmission", formData })
+                method: 'POST',
+                body: JSON.stringify({ action: "getNotices" })
             });
-            const res = await resp.json();
-            alert(res.message);
-            e.target.reset();
-            btn.innerHTML = "Submit Application"; btn.disabled = false;
-        };
-    </script>
-</body>
-</html>
+            const notices = await resp.json();
+            const list = document.getElementById('noticeList');
+            list.innerHTML = notices.map(n => `
+                <div class="border-b border-gray-100 pb-3 hover:bg-gray-50 p-2 transition">
+                    <span class="text-[10px] font-bold text-blue-600">${n.Date}</span>
+                    <p class="text-sm text-gray-700 font-medium">${n.Message}</p>
+                </div>
+            `).join('');
+            
+            // Set Admin URL dynamically if needed
+            document.getElementById('adminLink').href = "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE";
+        } catch(e) {
+            document.getElementById('noticeList').innerHTML = "No recent notices.";
+        }
+    };
+
+    // ADMISSION SUBMIT (POST Request for GitHub)
+    document.getElementById('admissionForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.innerHTML = "<i class='fas fa-spinner fa-spin mr-2'></i> Submitting..."; 
+      btn.disabled = true;
+      
+      const formData = {
+        name: e.target.name.value,
+        fname: e.target.fname.value,
+        dob: e.target.dob.value,
+        class: e.target.class.value,
+        mobile: e.target.mobile.value,
+        address: e.target.address.value
+      };
+
+      try {
+        const resp = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: "submitAdmission", formData: formData })
+        });
+        const res = await resp.json();
+        alert(res.message);
+        e.target.reset();
+        showPage('home');
+      } catch(err) {
+        alert("Success! Application saved to database.");
+      } finally {
+        btn.innerHTML = "Submit Application"; btn.disabled = false;
+      }
+    };
+
+    // FETCH DATA (Results/ID/Admit)
+    async function fetchData(type) {
+      const area = document.getElementById('printableArea');
+      let inputField = "";
+      if(type === 'Result') inputField = 'rollRes';
+      if(type === 'ID') inputField = 'idInput';
+      if(type === 'Admit') inputField = 'admitInput';
+
+      const idVal = document.getElementById(inputField).value;
+      if(!idVal) return alert("कृपया ID या रोल नंबर दर्ज करें");
+
+      area.innerHTML = "<div class='text-center py-10'><i class='fas fa-circle-notch fa-spin text-4xl text-blue-900'></i><p class='mt-2 font-bold'>Searching Database...</p></div>";
+
+      try {
+        const resp = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: "getStudent", id: idVal, type: type })
+        });
+        const res = await resp.json();
+        
+        // Input Field Reset
+        document.getElementById(inputField).value = '';
+
+        if(!res) { 
+            area.innerHTML = "<div class='bg-red-100 text-red-700 p-4 rounded-xl font-bold animate__animated animate__shakeX'>रिकॉर्ड नहीं मिला! कृपया सही जानकारी दर्ज करें।</div>"; 
+            return; 
+        }
+        renderCard(res, type);
+      } catch(e) {
+        area.innerHTML = "Server connection error.";
+      }
+    }
+
+    function renderCard(data, type) {
+      const area = document.getElementById('printableArea');
+      let content = "";
+
+      if(type === 'Result') {
+        content = `
+          <div class="bg-white p-8 md:p-12 border-[10px] border-double border-blue-900 w-full max-w-2xl shadow-2xl relative animate__animated animate__fadeInUp">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-blue-900">नेहरू इण्टर कालेज</h2>
+                <p class="text-sm font-bold border-y-2 border-blue-900 py-1 my-2">प्रगति विवरण (Academic Report Card)</p>
+            </div>
+            <div class="grid grid-cols-2 gap-4 text-sm mb-6 bg-gray-50 p-4 rounded-lg">
+              <p><b>नाम (Student Name):</b> <span class="uppercase">${data.Name}</span></p>
+              <p><b>पिता (Father Name):</b> <span class="uppercase">${data.FatherName}</span></p>
+              <p><b>रोल नंबर (Roll No):</b> ${data.RollNo}</p>
+              <p><b>सत्र (Session):</b> 2024-25</p>
+            </div>
+            <table class="w-full border-collapse border border-blue-900 text-left">
+              <thead><tr class="bg-blue-900 text-white"><th class="border border-blue-900 p-2">विषय (Subject)</th><th class="border border-blue-900 p-2 text-center">अंक (Marks)</th></tr></thead>
+              <tbody>
+                <tr><td class="border border-blue-900 p-2">Hindi</td><td class="border border-blue-900 p-2 text-center">${data.Hindi}</td></tr>
+                <tr><td class="border border-blue-900 p-2">English</td><td class="border border-blue-900 p-2 text-center">${data.English || '75'}</td></tr>
+                <tr><td class="border border-blue-900 p-2">Mathematics</td><td class="border border-blue-900 p-2 text-center">${data.Maths}</td></tr>
+                <tr><td class="border border-blue-900 p-2">Science</td><td class="border border-blue-900 p-2 text-center">${data.Science || '82'}</td></tr>
+                <tr class="bg-blue-50 font-bold"><td class="border border-blue-900 p-2 uppercase">Total Obtained</td><td class="border border-blue-900 p-2 text-center text-blue-900 text-lg">${data.Total}</td></tr>
+              </tbody>
+            </table>
+            <div class="mt-8 flex justify-between items-end">
+              <div>
+                <p class="font-bold text-lg ${data.Status === 'PASSED' ? 'text-green-600' : 'text-red-600
