@@ -1,206 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
-    body { font-family: 'Mukta', sans-serif; }
-    
-    /* PRINT LOGIC: Sirf target content dikhega */
-    @media print {
-      body * { visibility: hidden; }
-      #printableArea, #printableArea * { visibility: visible; }
-      #printableArea { position: absolute; left: 0; top: 0; width: 100%; }
-      .no-print { display: none !important; }
-    }
-
-    .hero-bg {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                  url('https://images.unsplash.com/photo-1523050853063-915894612264?auto=format&fit=crop&q=80&w=1200');
-      background-size: cover; background-position: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nehru Inter College - Official Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Mukta:wght@300;400;700&display=swap');
+        body { font-family: 'Mukta', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1523050853063-915894612264?auto=format&fit=crop&q=80&w=1200');
+            background-size: cover; background-position: center;
+        }
+        @media print {
+            body * { visibility: hidden; }
+            #printableArea, #printableArea * { visibility: visible; }
+            #printableArea { position: absolute; left: 0; top: 0; width: 100%; border:none; }
+            .no-print { display: none !important; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
 
-  <nav class="bg-blue-900 text-white shadow-xl sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <img src="https://via.placeholder.com/50" class="rounded-full border-2 border-yellow-400">
-        <h1 class="text-xl font-bold tracking-tight">नेहरू इण्टर कालेज<span class="block text-xs text-yellow-400">Uttar Pradesh, India</span></h1>
-      </div>
-      <div class="space-x-4 flex items-center">
-        <button onclick="showPage('home')" class="hover:text-yellow-400">Home</button>
-        <button onclick="showPage('portal')" class="bg-yellow-500 text-blue-900 px-4 py-1 rounded font-bold">Student Zone</button>
-        <button onclick="openAdmin()" class="bg-white/10 p-2 rounded hover:bg-white/20"><i class="fas fa-user-shield"></i></button>
-      </div>
-    </div>
-  </nav>
-
-  <div id="home" class="animate__animated animate__fadeIn">
-    <div class="hero-bg h-[500px] flex items-center justify-center text-center text-white px-4">
-      <div>
-        <h2 class="text-5xl font-extrabold mb-4 drop-shadow-lg">शिक्षा ही शक्ति है</h2>
-        <p class="text-xl mb-8 opacity-90">उत्तर प्रदेश का अग्रणी शिक्षण संस्थान</p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <button onclick="showPage('admission')" class="bg-red-600 hover:bg-red-700 px-8 py-3 rounded-full font-bold text-lg shadow-xl transition">Apply for Admission 2025</button>
-          <button onclick="showPage('portal')" class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-full font-bold text-lg shadow-xl transition">Check Results/ID/Admit Card/</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="container mx-auto my-12 px-4">
-      <h3 class="text-3xl font-bold text-center mb-8 border-b-4 border-blue-900 inline-block">Humari Jhalak</h3>
-      <div class="grid md:grid-cols-3 gap-6">
-        <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=400" class="rounded-xl shadow-lg hover:scale-105 transition">
-        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=400" class="rounded-xl shadow-lg hover:scale-105 transition">
-        <img src="https://images.unsplash.com/photo-1577891729319-f28b3c14a533?auto=format&fit=crop&q=80&w=400" class="rounded-xl shadow-lg hover:scale-105 transition">
-      </div>
-    </div>
-  </div>
-
-  <div id="portal" class="hidden container mx-auto p-6 animate__animated animate__zoomIn">
-    <div class="grid md:grid-cols-3 gap-8 mb-12">
-      <div class="bg-white p-6 rounded-2xl shadow-lg border-b-4 border-green-500">
-        <h3 class="font-bold text-xl mb-4"><i class="fas fa-file-invoice text-green-500"></i>रिजल्ट</h3>
-        <input id="rollRes" class="w-full border p-2 rounded mb-3" placeholder="Roll Number Dalein">
-        <button onclick="fetchData('Result')" class="w-full bg-green-600 text-white py-2 rounded font-bold">रिजल्ट देखें</button>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-lg border-b-4 border-blue-500">
-        <h3 class="font-bold text-xl mb-4"><i class="fas fa-id-card text-blue-500"></i> Identity Card</h3>
-        <input id="idInput" class="w-full border p-2 rounded mb-3" placeholder="Student ID Dalein">
-        <button onclick="fetchData('ID')" class="w-full bg-blue-600 text-white py-2 rounded font-bold">ID Card प्रिन्ट करें</button>
-      </div>
-      <div class="bg-white p-6 rounded-2xl shadow-lg border-b-4 border-orange-500">
-        <h3 class="font-bold text-xl mb-4"><i class="fas fa-ticket-alt text-orange-500"></i>प्रवेश पत्र</h3>
-        <input id="admitInput" class="w-full border p-2 rounded mb-3" placeholder="Roll No Dalein">
-        <button onclick="fetchData('Admit')" class="w-full bg-orange-500 text-white py-2 rounded font-bold">प्रवेश पत्र प्रिन्ट करें</button>
-      </div>
-    </div>
-    
-    <div id="printableArea" class="flex justify-center min-h-[400px]"></div>
-  </div>
-
-  <div id="admission" class="hidden container mx-auto max-w-2xl p-6 animate__animated animate__fadeIn">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl border">
-      <h2 class="text-3xl font-bold text-center text-blue-900 mb-6 underline">प्रवेश फार्म (2025)</h2>
-      <form id="admissionForm" class="space-y-4">
-        <div><label class="block font-bold">Student Name</label><input name="name" required class="w-full border p-2 rounded"></div>
-        <div><label class="block font-bold">Father's Name</label><input name="fname" required class="w-full border p-2 rounded"></div>
-        <div class="grid grid-cols-2 gap-4">
-          <div><label class="block font-bold">Date of Birth</label><input type="date" name="dob" class="w-full border p-2 rounded"></div>
-          <div><label class="block font-bold">Class</label><select name="class" class="w-full border p-2 rounded"><option>9th</option><option>10th</option><option>11th</option><option>12th</option></select></div>
-        </div>
-        <div><label class="block font-bold">Mobile Number</label><input type="tel" name="mobile" required class="w-full border p-2 rounded"></div>
-        <div><label class="block font-bold">Address</label><textarea name="address" class="w-full border p-2 rounded"></textarea></div>
-        <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-xl font-bold text-lg">Submit Form</button>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    function showPage(p) {
-      ['home', 'portal', 'admission'].forEach(id => document.getElementById(id).classList.add('hidden'));
-      document.getElementById(p).classList.remove('hidden');
-    }
-
-    function openAdmin() {
-      google.script.run.withSuccessHandler(url => window.open(url, '_blank')).getAdminUrl();
-    }
-
-    // ADMISSION SUBMIT
-    document.getElementById('admissionForm').onsubmit = function(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button');
-      btn.innerHTML = "Processing..."; btn.disabled = true;
-      
-      const formData = {
-        name: e.target.name.value,
-        fname: e.target.fname.value,
-        dob: e.target.dob.value,
-        class: e.target.class.value,
-        mobile: e.target.mobile.value,
-        address: e.target.address.value
-      };
-
-      google.script.run.withSuccessHandler(msg => {
-        alert(msg);
-        e.target.reset();
-        btn.innerHTML = "Submit Form"; btn.disabled = false;
-        showPage('home');
-      }).submitAdmission(formData);
-    };
-
-    // FETCH DATA & RESET INPUTS
-    function fetchData(type) {
-      const area = document.getElementById('printableArea');
-      let id = "";
-      if(type === 'Result') { id = document.getElementById('rollRes').value; document.getElementById('rollRes').value = ''; }
-      if(type === 'ID') { id = document.getElementById('idInput').value; document.getElementById('idInput').value = ''; }
-      if(type === 'Admit') { id = document.getElementById('admitInput').value; document.getElementById('admitInput').value = ''; }
-
-      if(!id) return alert("Please enter a valid ID/Roll No");
-      area.innerHTML = "Searching...";
-
-      google.script.run.withSuccessHandler(res => {
-        if(!res) { area.innerHTML = "No Record Found!"; return; }
-        renderCard(res, type);
-      }).getStudentDetails(id, type);
-    }
-
-    function renderCard(data, type) {
-      const area = document.getElementById('printableArea');
-      let content = "";
-
-      if(type === 'Result') {
-        content = `
-          <div class="bg-white p-10 border-4 border-double border-blue-900 w-full max-w-2xl">
-            <h2 class="text-center font-bold text-2xl uppercase">Nehru Inter College, UP</h2>
-            <h3 class="text-center bg-blue-900 text-white p-1 my-2">MARKSHEET / PRAVASHPATRA</h3>
-            <div class="flex justify-between mt-6">
-              <div><p><b>Name:</b> ${data.Name}</p><p><b>Roll No:</b> ${data.RollNo}</p></div>
-              <div class="border p-1 text-xs">Session 2024-25</div>
+    <nav class="bg-blue-900 text-white p-4 sticky top-0 z-50 shadow-2xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-yellow-400 text-blue-900 p-2 rounded-full font-bold">NIC</div>
+                <h1 class="text-xl font-bold tracking-tighter">NEHRU INTER COLLEGE <span class="block text-[10px] text-yellow-300">UTTAR PRADESH</span></h1>
             </div>
-            <table class="w-full mt-6 border-collapse border border-gray-400 text-left">
-              <thead><tr class="bg-gray-100"><th class="border p-2">Subject</th><th class="border p-2">Marks</th></tr></thead>
-              <tbody>
-                <tr><td class="border p-2">Hindi</td><td class="border p-2">${data.Hindi}</td></tr>
-                <tr><td class="border p-2">Maths</td><td class="border p-2">${data.Maths}</td></tr>
-                <tr><td class="border p-2">English</td><td class="border p-2">${data.English}</td></tr>
-                <tr class="font-bold"><td class="border p-2">GRAND TOTAL</td><td class="border p-2 text-blue-800">${data.Total}</td></tr>
-              </tbody>
-            </table>
-            <div class="mt-8 flex justify-between">
-              <span class="text-green-700 font-bold">STATUS: ${data.Status}</span>
-              <span class="border-t border-black px-4 text-xs">Principal Signature</span>
+            <div class="space-x-4">
+                <button onclick="showPage('home')" class="hover:text-yellow-400">Home</button>
+                <button onclick="showPage('portal')" class="bg-yellow-500 text-blue-900 px-4 py-1 rounded font-bold">Portal</button>
             </div>
-            <button onclick="window.print()" class="no-print mt-6 bg-black text-white px-4 py-2 rounded">Print</button>
-          </div>`;
-      } else {
-        // ID & ADMIT CARD DESIGN
-        content = `
-          <div class="bg-white border-2 border-blue-900 w-80 h-[450px] relative overflow-hidden shadow-2xl rounded-xl">
-             <div class="bg-blue-900 text-white text-center p-3">
-                <p class="font-bold text-xs uppercase">Nehru Inter College</p>
-                <p class="text-[10px] opacity-80">${type === 'ID' ? 'STUDENT IDENTITY CARD' : 'EXAMINATION ADMIT CARD'}</p>
-             </div>
-             <div class="p-6 flex flex-col items-center">
-                <img src="${data.PhotoURL}" class="w-24 h-24 border-2 border-blue-900 mb-4 object-cover">
-                <h3 class="font-bold text-lg text-blue-900">${data.Name}</h3>
-                <div class="text-sm space-y-2 mt-2 w-full">
-                  <p class="flex justify-between"><span>Father:</span> <b>${data.FatherName}</b></p>
-                  <p class="flex justify-between"><span>Class:</span> <b>${data.Class}</b></p>
-                  <p class="flex justify-between"><span>${type === 'ID' ? 'Student ID' : 'Roll No'}:</span> <b>${data.StudentID || data.RollNo}</b></p>
-                </div>
-                <div class="mt-10 w-full text-center border-t pt-2 text-[10px] text-gray-400">Computer Generated Copy</div>
-             </div>
-             <button onclick="window.print()" class="no-print absolute bottom-2 right-2 bg-blue-900 text-white px-2 py-1 text-xs rounded">Print Card</button>
-          </div>`;
-      }
-      area.innerHTML = content;
-    }
-  </script>
+        </div>
+    </nav>
+
+    <section id="home" class="animate__animated animate__fadeIn">
+        <div class="hero-bg h-[450px] flex items-center justify-center text-center text-white">
+            <div class="max-w-2xl px-4">
+                <h2 class="text-5xl font-extrabold mb-4">Shiksha, Pragati, Shanti</h2>
+                <p class="text-lg opacity-90 mb-6">Uttar Pradesh Board se manyata prapt agami shiksha kendra.</p>
+                <button onclick="showPage('admission')" class="bg-red-600 px-8 py-3 rounded-full font-bold text-lg animate__animated animate__pulse animate__infinite">Apply Admission 2025</button>
+            </div>
+        </div>
+
+        <div class="container mx-auto py-12 px-4 grid md:grid-cols-3 gap-6">
+            <img src="https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
+            <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
+            <img src="https://images.unsplash.com/photo-1577891729319-f28b3c14a533?auto=format&fit=crop&w=400" class="rounded-xl shadow-lg">
+        </div>
+    </section>
+
+    <section id="portal" class="hidden container mx-auto p-6 animate__animated animate__fadeInUp">
+        <div class="grid md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-green-500">
+                <h3 class="font-bold text-xl mb-4">Check Result</h3>
+                <input id="rollRes" class="w-full border p-2 rounded mb-3" placeholder="Enter Roll No">
+                <button onclick="fetchAPI('Result')" class="w-full bg-green-600 text-white py-2 rounded">View Marksheet</button>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-blue-500">
+                <h3 class="font-bold text-xl mb-4">Identity Card</h3>
+                <input id="idInput" class="w-full border p-2 rounded mb-3" placeholder="Enter Student ID">
+                <button onclick="fetchAPI('ID')" class="w-full bg-blue-600 text-white py-2 rounded">Get ID Card</button>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow border-t-4 border-orange-500">
+                <h3 class="font-bold text-xl mb-4">Admit Card</h3>
+                <input id="admitInput" class="w-full border p-2 rounded mb-3" placeholder="Enter Roll No">
+                <button onclick="fetchAPI('Admit')" class="w-full bg-orange-600 text-white py-2 rounded">Get Admit Card</button>
+            </div>
+        </div>
+        <div id="printableArea" class="flex justify-center p-4"></div>
+    </section>
+
+    <section id="admission" class="hidden container mx-auto max-w-xl p-6 animate__animated animate__zoomIn">
+        <div class="bg-white p-8 rounded-3xl shadow-2xl border">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-6">New Admission 2025</h2>
+            <form id="admForm" class="space-y-4">
+                <input name="name" placeholder="Student Full Name" required class="w-full border p-3 rounded-lg">
+                <input name="fname" placeholder="Father's Name" required class="w-full border p-3 rounded-lg">
+                <input name="mobile" placeholder="Mobile Number" required class="w-full border p-3 rounded-lg">
+                <select name="class" class="w-full border p-3 rounded-lg"><option>9th</option><option>10th</option><option>11th</option><option>12th</option></select>
+                <textarea name="address" placeholder="Full Address" class="w-full border p-3 rounded-lg"></textarea>
+                <button type="submit" class="w-full bg-blue-900 text-white py-3 rounded-lg font-bold">Submit Application</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // YAHAN APNA APPS SCRIPT URL DALEIN
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxcE6dfDaF2uUCxeU3Li6_anu-v1RbrQFxNF2OyMp5D87_3GGc70Ygfd6swZJtaqanl0Q/exec";
+
+        function showPage(id) {
+            ['home', 'portal', 'admission'].forEach(p => document.getElementById(p).classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        async function fetchAPI(type) {
+            const area = document.getElementById('printableArea');
+            let val = "";
+            if(type==='Result') { val = document.getElementById('rollRes').value; document.getElementById('rollRes').value=''; }
+            if(type==='ID') { val = document.getElementById('idInput').value; document.getElementById('idInput').value=''; }
+            if(type==='Admit') { val = document.getElementById('admitInput').value; document.getElementById('admitInput').value=''; }
+
+            area.innerHTML = "<p class='animate-pulse text-blue-600 font-bold'>Searching in Database...</p>";
+
+            const response = await fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify({ action: "getStudent", id: val, type: type })
+            });
+            const data = await response.json();
+
+            if(!data) { area.innerHTML = "No Record Found!"; return; }
+            render(data, type);
+        }
+
+        function render(data, type) {
+            const area = document.getElementById('printableArea');
+            let html = "";
+            if(type === 'Result') {
+                html = `<div class="bg-white border-4 border-double border-blue-900 p-8 w-full max-w-lg shadow-xl">
+                    <h2 class="text-center font-bold text-xl uppercase">Nehru Inter College</h2>
+                    <h4 class="text-center text-sm border-b pb-2 mb-4">Official Marksheet 2024-25</h4>
+                    <div class="text-sm mb-4"><b>Name:</b> ${data.Name} <br> <b>Roll No:</b> ${data.RollNo}</div>
+                    <table class="w-full border text-left text-sm">
+                        <tr class="bg-gray-100"><th class="p-2 border">Subject</th><th class="p-2 border">Marks</th></tr>
+                        <tr><td class="p-2 border">Hindi/Maths/Sci</td><td class="p-2 border">${data.Total}</td></tr>
+                    </table>
+                    <div class="mt-4 font-bold text-green-700">RESULT: ${data.Status}</div>
+                    <button onclick="window.print()" class="no-print mt-4 bg-black text-white px-3 py-1 text-xs">Print Marksheet</button>
+                </div>`;
+            } else {
+                html = `<div class="bg-white border-2 border-blue-900 rounded-xl w-72 h-96 relative shadow-2xl overflow-hidden">
+                    <div class="bg-blue-900 text-white text-center p-2 text-xs font-bold uppercase">${type} CARD</div>
+                    <div class="p-4 flex flex-col items-center">
+                        <img src="${data.PhotoURL}" class="w-24 h-24 border mb-2 object-cover">
+                        <h3 class="font-bold">${data.Name}</h3>
+                        <p class="text-xs text-gray-500">${data.FatherName}</p>
+                        <div class="w-full mt-4 text-[11px] space-y-1 bg-gray-50 p-2">
+                            <p>Class: ${data.Class}</p>
+                            <p>ID/Roll: ${data.StudentID || data.RollNo}</p>
+                        </div>
+                    </div>
+                    <button onclick="window.print()" class="no-print absolute bottom-2 right-2 bg-blue-900 text-white p-1 text-[10px]">Print</button>
+                </div>`;
+            }
+            area.innerHTML = html;
+        }
+
+        document.getElementById('admForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = "Submitting..."; btn.disabled = true;
+
+            const formData = {
+                name: e.target.name.value,
+                fname: e.target.fname.value,
+                mobile: e.target.mobile.value,
+                class: e.target.class.value,
+                address: e.target.address.value
+            };
+
+            const resp = await fetch(SCRIPT_URL, {
+                method: "POST",
+                body: JSON.stringify({ action: "submitAdmission", formData })
+            });
+            const res = await resp.json();
+            alert(res.message);
+            e.target.reset();
+            btn.innerHTML = "Submit Application"; btn.disabled = false;
+        };
+    </script>
 </body>
 </html>
