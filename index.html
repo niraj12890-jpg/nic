@@ -140,33 +140,97 @@
     }
 
     function renderCard(data, type) {
-      const area = document.getElementById('printableArea');
-      let html = "";
-      if(type === 'Result') {
-        html = `<div class="bg-white p-10 border-4 border-double border-blue-900 w-full max-w-md shadow-2xl animate__animated animate__fadeIn">
-            <h2 class="text-center font-bold text-xl uppercase">नेहरू इण्टर कालेज</h2>
-            <div class="my-4 border-b pb-2 text-sm"><b>Name:</b> ${data.Name} <br> <b>Roll:</b> ${data.RollNo}</div>
-            <table class="w-full text-left text-sm mb-4">
-               <tr><td>Hindi:</td><td>${data.Hindi || 0}</td></tr>
-               <tr><td>Maths:</td><td>${data.Maths || 0}</td></tr>
-               <tr><td>English:</td><td>${data.English || 0}</td></tr>
-               <tr class="font-bold border-t"><td>Total:</td><td>${data.Total}</td></tr>
-            </table>
-            <p class="font-bold text-green-700">STATUS: ${data.Status}</p>
-            <button onclick="window.print()" class="no-print mt-4 bg-black text-white px-4 py-2 rounded text-xs w-full">Print Marksheet</button>
-        </div>`;
-      } else {
-        html = `<div class="bg-white border-4 border-blue-900 w-72 h-96 p-4 text-center rounded-2xl shadow-xl relative animate__animated animate__flipInY">
-            <div class="bg-blue-900 text-white p-2 rounded mb-4 font-bold uppercase text-[10px]">${type} CARD</div>
-            <img src="${data.PhotoURL || 'https://via.placeholder.com/150'}" class="w-24 h-24 mx-auto border-2 border-blue-100 rounded-lg mb-4 object-cover">
-            <h3 class="font-bold uppercase text-blue-900">${data.Name}</h3>
-            <p class="text-xs text-gray-500">S/O: ${data.FatherName}</p>
-            <p class="text-sm font-bold mt-4">ID: ${data.StudentID || data.RollNo}</p>
-            <button onclick="window.print()" class="no-print absolute bottom-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white px-6 py-1 rounded-full text-xs">Print Card</button>
-        </div>`;
-      }
-      area.innerHTML = html;
-    }
+  const area = document.getElementById('printableArea');
+  let html = "";
+  
+  if(type === 'Result') {
+    // Naya Stylish aur Bada Result Card
+    html = `
+    <div class="bg-white p-8 md:p-12 border-[12px] border-double border-blue-900 w-full max-w-2xl shadow-2xl animate__animated animate__fadeIn relative">
+        <div class="text-center border-b-2 border-red-600 pb-4 mb-6">
+            <h2 class="text-3xl md:text-4xl font-black text-blue-900 uppercase">नेहरू इण्टर कालेज</h2>
+            <p class="text-sm font-bold text-gray-600">उत्तर प्रदेश शिक्षा बोर्ड द्वारा मान्यता प्राप्त</p>
+            <div class="mt-2 bg-red-600 text-white inline-block px-6 py-1 rounded-full text-sm font-bold uppercase tracking-widest">
+                वार्षिक परीक्षा परिणाम - 2025
+            </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-6 text-sm md:text-base bg-blue-50 p-4 rounded-lg">
+            <div><span class="font-bold text-blue-900">विद्यार्थी का नाम:</span> ${data.Name}</div>
+            <div><span class="font-bold text-blue-900">अनुक्रमांक (Roll No):</span> ${data.RollNo}</div>
+            <div><span class="font-bold text-blue-900">पिता का नाम:</span> ${data.FatherName || 'N/A'}</div>
+            <div><span class="font-bold text-blue-900">कक्षा:</span> ${data.Class || 'N/A'}</div>
+        </div>
+
+        <table class="w-full border-collapse border border-gray-300 text-center mb-6">
+            <thead>
+                <tr class="bg-blue-900 text-white">
+                    <th class="border border-gray-300 p-2">विषय (Subject)</th>
+                    <th class="border border-gray-300 p-2">पूर्णांक (Max)</th>
+                    <th class="border border-gray-300 p-2">प्राप्तांक (Obtained)</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-800 font-medium">
+                <tr><td class="border border-gray-300 p-2 text-left pl-4">Hindi</td><td class="border border-gray-300 p-2">100</td><td class="border border-gray-300 p-2">${data.Hindi || 0}</td></tr>
+                <tr><td class="border border-gray-300 p-2 text-left pl-4">English</td><td class="border border-gray-300 p-2">100</td><td class="border border-gray-300 p-2">${data.English || 0}</td></tr>
+                <tr><td class="border border-gray-300 p-2 text-left pl-4">Mathematics</td><td class="border border-gray-300 p-2">100</td><td class="border border-gray-300 p-2">${data.Maths || 0}</td></tr>
+                <tr><td class="border border-gray-300 p-2 text-left pl-4">Science</td><td class="border border-gray-300 p-2">100</td><td class="border border-gray-300 p-2">${data.Science || 0}</td></tr>
+                <tr class="bg-yellow-50 font-bold text-blue-900">
+                    <td class="border border-gray-300 p-2 text-right pr-4">कुल योग (Grand Total):</td>
+                    <td class="border border-gray-300 p-2">400</td>
+                    <td class="border border-gray-300 p-2 text-xl">${data.Total || 0}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="flex justify-between items-end mt-10">
+            <div class="text-center">
+                <p class="text-xs text-gray-400 mb-1">Date: ${new Date().toLocaleDateString()}</p>
+                <div class="px-4 py-1 border-2 border-dashed border-green-600 text-green-700 font-black text-xl rotate-[-5deg]">
+                    ${data.Status === 'PASSED' ? 'UTTIRNA (PASSED)' : 'ANUTTIRNA'}
+                </div>
+            </div>
+            <div class="text-center border-t border-black px-4 pt-1">
+                <p class="text-sm font-bold">प्रधानाचार्य के हस्ताक्षर</p>
+                <p class="text-[10px] text-gray-500">(Principal Seal & Sign)</p>
+            </div>
+        </div>
+
+        <button onclick="window.print()" class="no-print mt-8 bg-blue-900 hover:bg-blue-800 text-white px-8 py-2 rounded-full font-bold w-full transition shadow-lg">
+            <i class="fas fa-print mr-2"></i> Marksheet Print Karein
+        </button>
+    </div>`;
+  } else {
+    // ID Card/Admit Card Design (Wahi hai bas thoda clean kiya hai)
+    html = `
+    <div class="bg-white border-4 border-blue-900 w-80 h-[450px] p-6 text-center rounded-3xl shadow-2xl relative animate__animated animate__flipInY overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-20 bg-blue-900"></div>
+        <div class="relative z-10">
+            <h4 class="text-white font-bold text-sm tracking-widest uppercase mb-4">${type} CARD</h4>
+            <div class="w-28 h-28 mx-auto bg-white p-1 rounded-xl shadow-md mb-4">
+                <img src="${data.PhotoURL || 'https://via.placeholder.com/150'}" class="w-full h-full rounded-lg object-cover">
+            </div>
+            <h3 class="font-black text-xl text-blue-900 uppercase leading-tight">${data.Name}</h3>
+            <p class="text-xs font-bold text-red-600 mb-4">S/O: ${data.FatherName}</p>
+            
+            <div class="bg-gray-100 p-3 rounded-xl inline-block w-full">
+                <p class="text-[10px] text-gray-500 uppercase font-bold">Registration / Roll No</p>
+                <p class="text-lg font-black text-blue-900 tracking-wider">${data.StudentID || data.RollNo}</p>
+            </div>
+            
+            <div class="mt-4 flex justify-around text-[10px] font-bold text-gray-600 uppercase">
+                <div>Class: ${data.Class || 'N/A'}</div>
+                <div>Session: 2024-25</div>
+            </div>
+
+            <button onclick="window.print()" class="no-print absolute bottom-4 left-1/2 -translate-x-1/2 bg-blue-900 text-white px-8 py-1.5 rounded-full text-xs font-bold hover:scale-105 transition">
+                Download Card
+            </button>
+        </div>
+    </div>`;
+  }
+  area.innerHTML = html;
+}
 
     // UPDATED: Asli Admission Form Submission
     document.getElementById('admissionForm').onsubmit = async (e) => {
